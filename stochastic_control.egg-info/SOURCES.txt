@@ -1,7 +1,0 @@
-README.md
-setup.py
-stochastic_control.egg-info/PKG-INFO
-stochastic_control.egg-info/SOURCES.txt
-stochastic_control.egg-info/dependency_links.txt
-stochastic_control.egg-info/requires.txt
-stochastic_control.egg-info/top_level.txt
