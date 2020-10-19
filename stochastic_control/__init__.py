@@ -5,10 +5,11 @@ __version__ = '0.1'
 __author__ = 'Neil Walton'
 
 
-
-from .discrete_control.discrete_control import *
-#from .continuous_control import continuous_control
+from .approximate_rl.cross_entropy_method import *
 from .bandits.bandits import *
-from .tabular_rl import *
-from .approximate_rl import cross_entropy_method
+#from .continuous_control import continuous_control
+from .optimal_control import *
 from .plotting.plotting import *
+#from .stochasitc_approximation import *
+from .tabular_rl import *
+

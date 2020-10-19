@@ -1,7 +1,7 @@
 import numpy as np
 
-class cross_entropy_method_categorical:
-    ''' Cross Entropy Method -- Gaussian Implementation
+class CrossEntropyCategorical:
+    ''' Cross Entropy Method for Catagorical Data
     
     Source: 
        "The Cross-Entropy Method" 
@@ -20,32 +20,38 @@ class cross_entropy_method_categorical:
                   [q=0 means no decrease]
     '''
 
-    def __init__(self, probs, rho, alpha=1.):
-        self.probs = probs 
+    def __init__(self, p, rho, alpha=1.):
+        self.probs = p 
         self.rho = rho
         self.alpha = alpha
         self.time = 0 # number of training steps
         
     def train(self,x,y):
         # get top proportion rho
+        x = np.array(x)
         y = np.array(y)
         cutoff = int(self.rho * len(y))
         idx = y.argsort()[-1*cutoff:]
         x_data = x[idx]
         
         # update probs
-        probs_new = np.sum(x_data,axis=0)/len(x_data)
-        self.probs = self.alpha*probs_new + (1-self.alpha)*self.probs       
+        probs_new = np.zeros(len(self.probs))
+        categories, counts = np.unique(x_data, return_counts=True)  
+        probs_new[categories] = counts
+        probs_new = probs_new/np.sum(probs_new)        
+        self.probs = self.alpha*probs_new + (1-self.alpha)*self.probs   
         
         self.time = self.time+1
         
-    def act(self,N):
-        return np.array([np.random.choice(len(prob), N, p=prob) for prob in self.probs])
-    
+        return cutoff, x_data
         
-            
+    def act(self,N=1):
+        if N == 1: 
+            return np.random.choice(len(self.probs), p=self.probs)        
+        else:
+            return np.random.choice(len(self.probs), N, p=self.probs) 
     
-class cross_entropy_method_gaussian:
+class CrossEntropyGaussian:
     ''' Cross Entropy Method -- Gaussian Implementation
     
     Source: 
@@ -93,10 +99,10 @@ class cross_entropy_method_gaussian:
         self.beta = self.beta - self.beta*(1-1/self.time)**self.q
         
     def act(self,N):
-        return np.random.multivariate_normal(self.mu, self.sigma, N)
+        return np.random.multivariate_normal(self.mu, N, self.sigma, N)
 
 
-class cross_entropy_method:
+class CrossEntropyMethod:
     ''' Cross Entropy Method -- for Optimization
     
     Source: 

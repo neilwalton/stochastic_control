@@ -2,6 +2,7 @@
  - example for DP
  - shortest paths
  - Have you got policy and value iteration
+ - LQR Ricatti solver (CURRENT)
  - Kalman Filter
 2. **Continuous Time Control**
  - add things from notes
