@@ -51,6 +51,10 @@ class Value_Iteration:
         self.Q = np.array([np.zeros(nA) for s in range(nS)]) 
     
     def train(self,iters=1,verbose=False):
+        # for each iteration
+        # for states, actions
+        # find Q-factors as an expectation
+        # take the maximum Q-factor as value
         for t in range(iters):
             for s in range(self.nS):
                 for a in range(self.nA):
@@ -70,7 +74,6 @@ class Value_Iteration:
     def act(self,state):
         return np.argmax(self.Q[state])
     
-
     
 class Policy_Iteration:
     """ Policy Iteration - a numerical solution to a MDP
@@ -119,7 +122,7 @@ class Policy_Iteration:
     
     def train(self,time=1):
         for t in range(time):
-            # Get transitions and rewards of policy pi
+            # Get rewards of policy pi
             self.V = self._Rewards()
 
             # 2nd of two main steps update Q-factors:
@@ -157,11 +160,6 @@ class Policy_Iteration:
         # Solve for Reward function        
         I = np.identity(self.nS)
         
-        # Deal with poor matrix condition
-        det = np.linalg.det(I - self.disc * self.P_pi)         
-        if det < 0.000001 :
-            raise Exception("Poor conditioned matrix. Reduce the discount factor.")
-            
         self.R_pi = np.linalg.solve(I - self.disc * self.P_pi, self.r_pi)
 
         return self.R_pi

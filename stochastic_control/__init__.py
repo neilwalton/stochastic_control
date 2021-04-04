@@ -7,7 +7,7 @@ __author__ = 'Neil Walton'
 
 from .approximate_rl.cross_entropy_method import *
 from .bandits.bandits import *
-#from .continuous_control import continuous_control
+from .continuous_control import *
 from .optimal_control import *
 from .plotting.plotting import *
 #from .stochasitc_approximation import *
