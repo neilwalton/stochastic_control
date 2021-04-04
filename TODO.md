@@ -6,6 +6,7 @@
  - Kalman Filter
 2. **Continuous Time Control**
  - add things from notes
+ - add Milstein to Euler Maruyama
  - HJB solver
 3. **Stochastic Approximation and Function Approximation**
 4. **Bandits**
