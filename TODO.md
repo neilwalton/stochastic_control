@@ -11,9 +11,9 @@
 3. **Stochastic Approximation and Function Approximation**
 4. **Bandits**
  - Gradient Bandit
+-  Contextual Bandits
  - Need to define non-Bernoulli Bandits
 5. **RL** 
- - Q-learning example finish 
- - SARSA and maybe expected SARSA.
+ - expected SARSA.
  - Cross Entropy Method.
 

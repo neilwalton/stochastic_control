@@ -167,7 +167,7 @@ class samba_bandit:
         self.alpha = alpha
         self.cooling = cooling
         if self.cooling :
-            self.alphas = self.alpha / (1-np.log(self.probs))
+            self.alphas = self.alpha / (np.log(np.e*np.ones(self.num_arms)-np.log(self.probs)))
         else:
             self.alphas = self.alpha * np.ones(self.num_arms)
             
@@ -183,7 +183,7 @@ class samba_bandit:
         self.probs[arm_star] = 1-np.sum(np.delete(self.probs, arm_star, 0))
         
         if self.cooling :
-            self.alphas = self.alpha / (1-np.log(self.probs))
+            self.alphas = self.alpha / (np.log(np.e*np.ones(self.num_arms)-np.log(self.probs)))
         
     def act(self):
         return np.random.choice(self.num_arms,p=self.probs)
